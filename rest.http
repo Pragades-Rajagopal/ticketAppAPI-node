@@ -1,0 +1,9 @@
+
+###
+GET http://localhost:9192/ticketapp-api HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp-api/Feb2022 HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp-api/months HTTP/1.1
