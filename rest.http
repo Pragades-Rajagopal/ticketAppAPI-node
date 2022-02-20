@@ -3,7 +3,13 @@
 GET http://localhost:9192/ticketapp-api HTTP/1.1
 
 ###
-GET http://localhost:9192/ticketapp-api/Feb2022 HTTP/1.1
+GET http://localhost:9192/ticketapp-api/Jan2021 HTTP/1.1
 
 ###
 GET http://localhost:9192/ticketapp-api/months HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp-api/resolution/Circuit+Fetching+-+PO+details+Updated+for+Cramer+fetched+circuit/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp-api/all/resolutions/ HTTP/1.1
