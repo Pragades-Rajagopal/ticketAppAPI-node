@@ -30,11 +30,25 @@ const getAllResolutions = () => {
     return db.appDatabase.prepare(sql).all();
 };
 
+const getTicket = (ticket) => {
+    const sql = "SELECT * FROM TICKETS WHERE TICKET = ?";
+
+    return db.appDatabase.prepare(sql).all(ticket);
+};
+
+const updateTicket = (ticket, app, created_on, mon, resolved) => {
+    const sql = "UPDATE TICKETS SET APP_NM = ?, CREATED_ON = ?, MON = ?, RESOLVED_BY = ? WHERE TICKET = ?";
+
+    return db.appDatabase.prepare(sql).run(app, created_on, mon, resolved, ticket);
+};
+
 
 module.exports = {
     getData,
     getDataByMonth,
     getMonths,
     getResolution,
-    getAllResolutions
+    getAllResolutions,
+    getTicket,
+    updateTicket
 }

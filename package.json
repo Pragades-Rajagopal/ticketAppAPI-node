@@ -6,17 +6,9 @@
   "scripts": {
     "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pragades-Rajagopal/ticketAppAPI-node.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Pragades-Rajagopal/ticketAppAPI-node/issues"
-  },
-  "homepage": "https://github.com/Pragades-Rajagopal/ticketAppAPI-node#readme",
   "dependencies": {
     "better-sqlite3": "^7.5.0",
     "body-parser": "^1.19.2",
