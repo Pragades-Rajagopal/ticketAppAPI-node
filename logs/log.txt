@@ -1,0 +1,3 @@
+[2022/02/26 01:41:12]: Application is running in port 9192 
+[2022/02/26 01:41:12]: Database is connected to path "C:\Node exp\TicketApp\database\data.sqlite3"
+[2022/02/26 01:41:24]: api request to get all details

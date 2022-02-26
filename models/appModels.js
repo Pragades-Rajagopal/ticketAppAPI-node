@@ -42,6 +42,8 @@ const updateTicket = (ticket, app, created_on, mon, resolved) => {
     return db.appDatabase.prepare(sql).run(app, created_on, mon, resolved, ticket);
 };
 
+const dbPath = db.dbPath;
+
 
 module.exports = {
     getData,
@@ -50,5 +52,6 @@ module.exports = {
     getResolution,
     getAllResolutions,
     getTicket,
-    updateTicket
+    updateTicket,
+    dbPath
 }

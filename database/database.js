@@ -5,5 +5,5 @@ const dbPath = path.resolve(__dirname, '../../', 'TicketApp/database', 'data.sql
 
 const appDatabase = new sqlite(dbPath, {fileMustExist: true});
 
-module.exports = { appDatabase };
+module.exports = { appDatabase, dbPath };
 
