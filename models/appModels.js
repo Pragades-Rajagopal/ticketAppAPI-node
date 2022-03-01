@@ -42,6 +42,12 @@ const updateTicket = (ticket, app, created_on, mon, resolved) => {
     return db.appDatabase.prepare(sql).run(app, created_on, mon, resolved, ticket);
 };
 
+const fetchData = (month) => {
+    const sql = "SELECT * FROM TICKETS_V2 WHERE MONTH = ?";
+
+    return db.appDatabase.prepare(sql).all(month);
+};
+
 const dbPath = db.dbPath;
 
 
@@ -53,5 +59,6 @@ module.exports = {
     getAllResolutions,
     getTicket,
     updateTicket,
-    dbPath
+    dbPath,
+    fetchData
 }
