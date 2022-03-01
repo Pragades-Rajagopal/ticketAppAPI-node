@@ -2,12 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const model = require('./models/appModels');
-require("./logger/writetoLog");
+require("./utils/writetoLog");
 const moment = require('moment');
-const path = require('path');
+// const path = require('path');
+const logPath = require('./utils/createlogFile')
 
-const logFile = path.resolve(__dirname, 'logs', 'log.txt');
-console.file(logFile);
+// const logFile = path.resolve(__dirname, 'logs', 'log.txt');
+console.file(logPath.logFile);
 
 const port = 9192;
 const app = express();
