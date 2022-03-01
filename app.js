@@ -4,10 +4,8 @@ const cors = require('cors');
 const model = require('./models/appModels');
 require("./utils/writetoLog");
 const moment = require('moment');
-// const path = require('path');
 const logPath = require('./utils/createlogFile')
 
-// const logFile = path.resolve(__dirname, 'logs', 'log.txt');
 console.file(logPath.logFile);
 
 const port = 9192;
