@@ -1,0 +1,14 @@
+[2022/03/01 09:28:22]: Application is running in port 9192 
+[2022/03/01 09:28:22]: Database is connected to path "C:\Node exp\TicketApp\database\data.sqlite3"
+[2022/03/01 09:29:29]: api request to get resolution details for resolution: "Supplier/Customer Migration/Numbering Plan Change Request"
+[2022/03/01 09:29:33]: api request to get all resolution details
+[2022/03/01 09:29:36]: api request to get months
+[2022/03/01 09:29:41]: api request to get all resolution details
+[2022/03/01 09:29:57]: api request to get resolution details for resolution: "Application Latency - Multi user sessions"
+[2022/03/01 09:30:15]: api request to get resolution details for invalid resolution: "ApplicationLatency - Multi user sessions"
+[2022/03/01 09:30:28]: api request to get resolution details for resolution: "Application Latency - Multi user sessions"
+[2022/03/01 09:30:45]: api request to get ticket detail for ticket: 10033941
+[2022/03/01 09:31:03]: api request to update ticket detail for ticket: 10034041 || data: [REPC, 2022/02/15 03:33:10, Feb2022, Bharat]
+[2022/03/01 09:31:05]: api request to get ticket detail for ticket: 10033941
+[2022/03/01 09:31:23]: api request to update ticket detail for invalid ticket: 100340
+[2022/03/01 09:31:33]: api request to update ticket detail for ticket: 10034041 || data: [REPC, 2022/02/15 03:33:10, Feb2022, Bharat]

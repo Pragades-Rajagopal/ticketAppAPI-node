@@ -8,7 +8,7 @@ GET http://localhost:9192/ticketapp/api/details/Feb2022/ HTTP/1.1
 GET http://localhost:9192/ticketapp/api/details/months/ HTTP/1.1
 
 ###
-GET http://localhost:9192/ticketapp/api/resolution/Charge+Transfer+-+SECS+Change+order/ HTTP/1.1
+GET http://localhost:9192/ticketapp/api/resolution/Application+Latency+-+Multi+user+sessions/ HTTP/1.1
 
 ###
 GET http://localhost:9192/ticketapp/api/all/resolutions/ HTTP/1.1
