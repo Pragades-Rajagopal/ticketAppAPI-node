@@ -1,0 +1,6 @@
+[2022/03/02 06:09:00]: File for Feb2022 is prepared and sent to destination
+[2022/03/02 06:09:00]: File for Mar2022 is prepared and sent to destination
+[2022/03/02 06:10:00]: File for Feb2022 is prepared and sent to destination
+[2022/03/02 06:10:00]: File for Mar2022 is prepared and sent to destination
+[2022/03/02 06:11:00]: File for Feb2022 is prepared and sent to destination
+[2022/03/02 06:11:00]: File for Mar2022 is prepared and sent to destination

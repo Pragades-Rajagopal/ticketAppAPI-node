@@ -7,7 +7,8 @@ const moment = require('moment');
 const logPath = require('./utils/createlogFile')
 
 const prepareCSV = require('./prepareCSV/spooler');
-prepareCSV.data;
+prepareCSV.dataPrev;
+prepareCSV.dataCur;
 
 console.file(logPath.logFile);
 
