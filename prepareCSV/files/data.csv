@@ -1,0 +1,17 @@
+RESOLUTION,TICKET_COUNT,TICKET_TYPE,MONTH
+Bill Start Date Update for Data Orders,1,Service Request,Jan2022
+Old charge Id update in the latest MACD order,1,Incident,Jan2022
+Termination Date Update for Data Orders,2,Service Request,Jan2022
+Pilot activity - City Configuration,1,Service Request,Jan2022
+Circuit Fetching - PO details Updated for Cramer fetched circuit,1,Incident,Jan2022
+Charge Transfer - SECS Change order,7,Incident,Jan2022
+Backend Update - Toll-Free number removal/Order Elimination for Optimus Orders,2,Service Request,Jan2022
+Backend Update - Charge for Tiger Voice Orders,1,Incident,Jan2022
+Backed Update - Incoming Digit/Foreign Incoming Digit/Routing No for Optimus Orders,5,Service Request,Jan2022
+Backend Update - MSPS application server,1,Service Request,Jan2022
+Supplier/Customer Migration/Numbering Plan Change Request,1,Incident,Jan2022
+Order closure - XML Failure,1,Incident,Jan2022
+Backend Update - Service Precedence and Service Abbreviation,1,Incident,Jan2022
+Application Latency - Multi user sessions,4,Incident,Jan2022
+Pilot activity-Owner/Service Configuration,1,Service Request,Jan2022
+Backend Update - Charge for Tiger Voice Orders,3,Service Request,Jan2022

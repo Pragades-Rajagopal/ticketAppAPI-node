@@ -18,8 +18,20 @@ const getMonths = () => {
     return db.appDatabase.prepare(sql).all();
 };
 
+const ticketCount = () => {
+    const sql = "SELECT * FROM TICKET_TYPE_COUNT_V";
+    
+    return db.appDatabase.prepare(sql).all();
+};
+
+const ticketCountMonth = (month) => {
+    const sql = "SELECT * FROM TICKET_TYPE_COUNT_V WHERE MONTH = ?";
+
+    return db.appDatabase.prepare(sql).all(month);
+};
+
 const getResolution = (resolution) => {
-    const sql = "SELECT MONTH, TICKET_COUNT from TICKETS_V2 tv where RESOLUTION = ?"
+    const sql = "SELECT MONTH, TICKET_COUNT, TICKET_TYPE from TICKETS_V2 tv where RESOLUTION = ?"
 
     return db.appDatabase.prepare(sql).all(resolution);
 };
@@ -42,6 +54,18 @@ const updateTicket = (ticket, app, created_on, mon, resolved) => {
     return db.appDatabase.prepare(sql).run(app, created_on, mon, resolved, ticket);
 };
 
+const fetchData = (month) => {
+    const sql = "SELECT * FROM TICKETS_V2 WHERE MONTH = ?";
+
+    return db.appDatabase.prepare(sql).all(month);
+};
+
+const deleteTicket = (ticket) => {
+    const sql = "DELETE FROM TICKETS WHERE TICKET = ?";
+
+    return db.appDatabase.prepare(sql).run(ticket);
+};
+
 const dbPath = db.dbPath;
 
 
@@ -53,5 +77,9 @@ module.exports = {
     getAllResolutions,
     getTicket,
     updateTicket,
-    dbPath
+    dbPath,
+    fetchData,
+    deleteTicket,
+    ticketCount,
+    ticketCountMonth
 }

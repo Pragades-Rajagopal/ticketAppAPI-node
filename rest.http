@@ -2,10 +2,16 @@
 GET http://localhost:9192/ticketapp/api/details/ HTTP/1.1
 
 ###
-GET http://localhost:9192/ticketapp/api/details/Feb2022/ HTTP/1.1
+GET http://localhost:9192/ticketapp/api/details/Mar2022/ HTTP/1.1
 
 ###
 GET http://localhost:9192/ticketapp/api/details/months/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp/api/ticket-count/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp/api/ticket-count/Feb2022/ HTTP/1.1
 
 ###
 GET http://localhost:9192/ticketapp/api/resolution/Application+Latency+-+Multi+user+sessions/ HTTP/1.1
@@ -30,4 +36,7 @@ Content-Type: application/json
     "MON": "Feb2022",
     "RESOLVED_BY": "Bharat"
 }
+
+###
+GET http://localhost:9192/ticketapp/api/insights/ HTTP/1.1
 
