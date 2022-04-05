@@ -1,0 +1,16 @@
+[2022/04/04 05:55:25]: Application is running in port 9192 
+[2022/04/04 05:55:25]: Database is connected to path "C:\Node exp\TicketApp\database\data.sqlite3"
+[2022/04/04 05:55:31]: api request to get all details
+[2022/04/04 05:55:25]: api request to get details for month: Feb2022
+[2022/04/04 05:55:25]: api request to get details for month: Mar2022
+[2022/04/04 05:56:09]: api request to get details for invalid month: Apr2022
+[2022/04/04 05:56:18]: api request to get months
+[2022/04/04 05:56:25]: api request to get details for invalid month: month
+[2022/04/04 05:56:31]: api request to get months
+[2022/04/04 05:56:33]: api request to get ticket count details
+[2022/04/04 05:56:35]: api request to get ticket count detail for month: Mar2022
+[2022/04/04 05:56:40]: api request to get ticket count detail for invalid month: Mar20222
+[2022/04/04 05:56:45]: api request to get ticket count detail for month: Mar2022
+[2022/04/04 05:56:51]: api request to get ticket count detail for month: Feb2022
+[2022/04/04 05:56:56]: api request to get all resolution details
+[2022/04/04 05:57:09]: api request to get ticket detail for ticket: 10033941

@@ -4,11 +4,12 @@ const cors = require('cors');
 const model = require('./models/appModels');
 require("./utils/writetoLog");
 const moment = require('moment');
-const logPath = require('./utils/createlogFile')
+const logPath = require('./utils/createlogFile');
+const info = require('./insights');
 
-const prepareCSV = require('./prepareCSV/spooler');
-prepareCSV.dataPrev;
-prepareCSV.dataCur;
+// const prepareCSV = require('./prepareCSV/spooler');
+// prepareCSV.dataPrev;
+// prepareCSV.dataCur;
 
 console.file(logPath.logFile);
 
@@ -51,6 +52,33 @@ app.get('/ticketapp/api/details/:month', (req, res) => {
     }
 
     console.log(`[${time}]: api request to get details for month: ${month}`);
+    res.status(200).json(data);
+});
+
+app.get('/ticketapp/api/ticket-count', (req, res) => {
+    let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+    console.log(`[${time}]: api request to get ticket count details`);
+
+    const data = model.ticketCount();
+    res.status(200).json(data);
+});
+
+app.get('/ticketapp/api/ticket-count/:month', (req, res) => {
+    const month = req.params.month;
+
+    const data = model.ticketCountMonth(month);
+
+    if (data.length === 0){
+        let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+        console.log(`[${time}]: api request to get ticket count detail for invalid month: ${month}`);
+
+        res.status(404).json({"no data":"specified month is not available"});
+        return;
+    }
+
+    let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+    console.log(`[${time}]: api request to get ticket count detail for month: ${month}`);
+
     res.status(200).json(data);
 });
 
@@ -173,6 +201,29 @@ app.put('/ticketapp/api/ticket', (req, res) => {
         res.status(400).json({"error": err.message});
     }
 
+});
+
+app.delete('/ticketapp/api/ticket/:id', (req, res) => {
+    const ticket = req.params.id;
+
+    const data = model.deleteTicket(ticket);
+
+    if (data["changes"] !== 1) {
+        let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+        console.log(`[${time}]: api request to delete ticket detail for invalid ticket: ${ticket}`);
+
+        res.status(400).json({"message": "no delete performed on invalid ticket " + ticket});
+        return;
+    }
+
+    let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+    console.log(`[${time}]: api request to delete ticket detail for ticket: ${ticket}`);
+
+    res.status(200).json({"success": `ticket ${ticket} deleted`});
+});
+
+app.get('/ticketapp/api/insights', (req, res) => {
+    res.status(200).json(info.insights);
 });
 
 let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
