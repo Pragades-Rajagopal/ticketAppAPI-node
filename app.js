@@ -229,6 +229,6 @@ app.get('/ticketapp/api/insights', (req, res) => {
 let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
 app.listen(
     port
-    , () => console.log(`[${time}]: Application is running in port ${port} \n[${time}]: Database is connected to path "${model.dbPath}"`)
+    , () => console.log(`[${time}]: Application is running in port ${port}`)
     );
 

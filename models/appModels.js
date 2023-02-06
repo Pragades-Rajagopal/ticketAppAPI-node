@@ -1,4 +1,4 @@
-const db = require('../database/database');
+const db = require('../connector/database');
 
 const getData = () => {
     const sql = "SELECT * FROM TICKETS_V2";
