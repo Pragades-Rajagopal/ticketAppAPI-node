@@ -5,8 +5,11 @@ const model = require('./models/appModels');
 require("./utils/writetoLog");
 const moment = require('moment');
 const logPath = require('./utils/createlogFile');
-// const info = require('./insights');
+const info = require('./insight.json');
 
+/**
+ * Below code is for chart application - Dev purpose
+ */
 // const prepareCSV = require('./prepareCSV/spooler');
 // prepareCSV.dataPrev;
 // prepareCSV.dataCur;
@@ -21,6 +24,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+
 app.get('/ticketapp/api/details', (req, res) => {
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get all details`);
@@ -29,17 +33,17 @@ app.get('/ticketapp/api/details', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/details/:month', (req, res) => {
-    const month = req.params.month;
+app.get('/ticketapp/api/details/months', (req, res) => {
+    let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+    console.log(`[${time}]: api request to get months`);
 
-    if (month.toUpperCase() === 'MONTHS') {
-        let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
-        console.log(`[${time}]: api request to get months`);
+    const values = model.getMonths();
+    res.status(200).send(values);
+    return;
+});
 
-        const values = model.getMonths();
-        res.status(200).send(values);
-        return;
-    }
+app.get('/ticketapp/api/details/month', (req, res) => {
+    const month = req.body.month;
 
     const data = model.getDataByMonth(month);
 
@@ -47,7 +51,7 @@ app.get('/ticketapp/api/details/:month', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get details for invalid month: ${month}`);
 
-        res.status(404).json({ "no data": "specified month is not available" });
+        res.status(404).json({ "message": "no data available for specified month" });
         return;
     }
 
@@ -55,7 +59,7 @@ app.get('/ticketapp/api/details/:month', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/ticket-count', (req, res) => {
+app.get('/ticketapp/api/details/ticket-count', (req, res) => {
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get ticket count details`);
 
@@ -63,7 +67,7 @@ app.get('/ticketapp/api/ticket-count', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/ticket-count/:month', (req, res) => {
+app.get('/ticketapp/api/details/ticket-count/:month', (req, res) => {
     const month = req.params.month;
 
     const data = model.ticketCountMonth(month);
@@ -72,7 +76,7 @@ app.get('/ticketapp/api/ticket-count/:month', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get ticket count detail for invalid month: ${month}`);
 
-        res.status(404).json({ "no data": "specified month is not available" });
+        res.status(404).json({ "message": "no data available for specified month" });
         return;
     }
 
@@ -82,66 +86,60 @@ app.get('/ticketapp/api/ticket-count/:month', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/resolution/:value', (req, res) => {
-    var resolution_ = req.params.value;
-    resolution_ = resolution_.split('+').join(' ');
-    resolution_ = resolution_.split('=').join('/');
+app.get('/ticketapp/api/details/resolution/', (req, res) => {
+    var resolution = req.body.RESOLUTION;
 
-    const data = model.getResolution(resolution_);
+    if (!resolution) {
+        return res.status(400).json({ message: "RESOLUTION is mandatory" })
+    }
+
+    const data = model.getResolution(resolution);
 
     if (data.length === 0) {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
-        console.log(`[${time}]: api request to get resolution details for invalid resolution: "${resolution_}"`);
+        console.log(`[${time}]: api request to get resolution details for invalid resolution: "${resolution}"`);
 
-        res.status(404).json({ "no data": "no output for provided resolution" });
+        res.status(404).json({ "message": "no output for provided resolution" });
         return;
     }
 
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
-    console.log(`[${time}]: api request to get resolution details for resolution: "${resolution_}"`);
+    console.log(`[${time}]: api request to get resolution details for resolution: "${resolution}"`);
     return res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/all/resolutions', (req, res) => {
+app.get('/ticketapp/api/details/resolution/all', (req, res) => {
     const data = model.getAllResolutions();
-    var length = data.length;
-
-    var result = [];
-    for (let i = 0; i < length; i++) {
-
-        let value = []
-        value[i] = data[i]["RESOLUTION"];
-        value[i] = value[i].split(' ').join('+');
-        value[i] = value[i].split('/').join('=');
-
-        result.push({ "RESOLUTION": data[i]["RESOLUTION"], "PARAM_RESULT": value[i] });
-    }
 
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get all resolution details`);
 
-    res.status(200).json(result);
+    res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/ticket/:id', (req, res) => {
-    const ticket = req.params.id;
+app.get('/ticketapp/api/details/ticket', (req, res) => {
+    const ticket = req.body.TICKET;
+    if (!ticket) {
+        return res.status(400).json({ message: "TICKET is mandatory" })
+    }
+
     const data = model.getTicket(ticket)
 
     if (data.length === 0) {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get ticket detail for invalid ticket: ${ticket}`);
 
-        res.status(404).json({ "no data": "ticket detail not available for ticket: " + ticket });
+        res.status(404).json({ "message": "ticket detail not available for ticket: " + ticket });
         return;
     }
 
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get ticket detail for ticket: ${ticket}`);
 
-    res.status(200).json(data);
+    res.status(200).json(data[0]);
 });
 
-app.put('/ticketapp/api/ticket', (req, res) => {
+app.put('/ticketapp/api/details/ticket', (req, res) => {
 
     try {
         var errors = [];
@@ -203,8 +201,12 @@ app.put('/ticketapp/api/ticket', (req, res) => {
 
 });
 
-app.delete('/ticketapp/api/ticket/:id', (req, res) => {
-    const ticket = req.params.id;
+app.delete('/ticketapp/api/details/ticket', (req, res) => {
+    const ticket = req.body.TICKET;
+
+    if (!ticket) {
+        return res.status(400).json({ "message": "TICKET is mandatory" })
+    }
 
     const data = model.deleteTicket(ticket);
 
@@ -212,23 +214,25 @@ app.delete('/ticketapp/api/ticket/:id', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to delete ticket detail for invalid ticket: ${ticket}`);
 
-        res.status(400).json({ "message": "no delete performed on invalid ticket " + ticket });
+        res.status(400).json({ "message": "no delete performed on invalid ticket: " + ticket });
         return;
     }
 
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to delete ticket detail for ticket: ${ticket}`);
 
-    res.status(200).json({ "success": `ticket ${ticket} deleted` });
+    res.status(200).json({ "message": `ticket ${ticket} deleted` });
 });
 
-app.get('/ticketapp/api/insights', (req, res) => {
-    res.status(200).json(info.insights);
+app.get('/ticketapp/details/api-insight', (req, res) => {
+    res.status(200).json(info);
 });
 
 let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
+
 app.listen(
     port
     , () => console.log(`[${time}]: Application is running in port ${port}`)
 );
+
 
