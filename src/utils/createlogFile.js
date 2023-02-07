@@ -1,11 +1,9 @@
 const fs = require('fs');
-const path = require('path');
 const moment = require('moment');
+const { logPath } = require('../config/utilityConfig')
 
+const logFile = logPath;
 const time = moment.utc().format('YYYYMMDDhhmm');
-const filename = 'log_' + time + '.txt';
-
-const logFile = path.resolve(__dirname, '../logs', filename)
 
 fs.writeFileSync(logFile, time);
 

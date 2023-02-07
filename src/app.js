@@ -5,7 +5,7 @@ const model = require('./models/appModels');
 require("./utils/writetoLog");
 const moment = require('moment');
 const logPath = require('./utils/createlogFile');
-const info = require('./insights');
+// const info = require('./insights');
 
 // const prepareCSV = require('./prepareCSV/spooler');
 // prepareCSV.dataPrev;
@@ -16,7 +16,7 @@ console.file(logPath.logFile);
 const port = 9192;
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors());
@@ -35,7 +35,7 @@ app.get('/ticketapp/api/details/:month', (req, res) => {
     if (month.toUpperCase() === 'MONTHS') {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get months`);
-        
+
         const values = model.getMonths();
         res.status(200).send(values);
         return;
@@ -47,7 +47,7 @@ app.get('/ticketapp/api/details/:month', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get details for invalid month: ${month}`);
 
-        res.status(404).json({"no data":"specified month is not available"});
+        res.status(404).json({ "no data": "specified month is not available" });
         return;
     }
 
@@ -68,11 +68,11 @@ app.get('/ticketapp/api/ticket-count/:month', (req, res) => {
 
     const data = model.ticketCountMonth(month);
 
-    if (data.length === 0){
+    if (data.length === 0) {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get ticket count detail for invalid month: ${month}`);
 
-        res.status(404).json({"no data":"specified month is not available"});
+        res.status(404).json({ "no data": "specified month is not available" });
         return;
     }
 
@@ -93,7 +93,7 @@ app.get('/ticketapp/api/resolution/:value', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get resolution details for invalid resolution: "${resolution_}"`);
 
-        res.status(404).json({"no data":"no output for provided resolution"});
+        res.status(404).json({ "no data": "no output for provided resolution" });
         return;
     }
 
@@ -108,15 +108,15 @@ app.get('/ticketapp/api/all/resolutions', (req, res) => {
 
     var result = [];
     for (let i = 0; i < length; i++) {
-        
+
         let value = []
         value[i] = data[i]["RESOLUTION"];
         value[i] = value[i].split(' ').join('+');
         value[i] = value[i].split('/').join('=');
 
-        result.push({"RESOLUTION": data[i]["RESOLUTION"], "PARAM_RESULT": value[i]});
+        result.push({ "RESOLUTION": data[i]["RESOLUTION"], "PARAM_RESULT": value[i] });
     }
-    
+
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get all resolution details`);
 
@@ -131,7 +131,7 @@ app.get('/ticketapp/api/ticket/:id', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to get ticket detail for invalid ticket: ${ticket}`);
 
-        res.status(404).json({"no data":"ticket detail not available for ticket: "+ ticket});
+        res.status(404).json({ "no data": "ticket detail not available for ticket: " + ticket });
         return;
     }
 
@@ -171,7 +171,7 @@ app.put('/ticketapp/api/ticket', (req, res) => {
         }
 
         if (errors.length) {
-            res.status(400).json({"errors": errors});
+            res.status(400).json({ "errors": errors });
             return;
         }
 
@@ -187,18 +187,18 @@ app.put('/ticketapp/api/ticket', (req, res) => {
             let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
             console.log(`[${time}]: api request to update ticket detail for invalid ticket: ${ticket}`);
 
-            res.status(400).json({"message": "no update performed on invalid ticket " + ticket});
+            res.status(400).json({ "message": "no update performed on invalid ticket " + ticket });
             return;
         }
 
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to update ticket detail for ticket: ${ticket} || data: [${APP_NM}, ${CREATED_ON}, ${MON}, ${RESOLVED_BY}]`);
 
-        res.status(200).json({"success": "details updated"});
+        res.status(200).json({ "success": "details updated" });
 
     }
-    catch (err){
-        res.status(400).json({"error": err.message});
+    catch (err) {
+        res.status(400).json({ "error": err.message });
     }
 
 });
@@ -212,14 +212,14 @@ app.delete('/ticketapp/api/ticket/:id', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to delete ticket detail for invalid ticket: ${ticket}`);
 
-        res.status(400).json({"message": "no delete performed on invalid ticket " + ticket});
+        res.status(400).json({ "message": "no delete performed on invalid ticket " + ticket });
         return;
     }
 
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to delete ticket detail for ticket: ${ticket}`);
 
-    res.status(200).json({"success": `ticket ${ticket} deleted`});
+    res.status(200).json({ "success": `ticket ${ticket} deleted` });
 });
 
 app.get('/ticketapp/api/insights', (req, res) => {
@@ -230,5 +230,5 @@ let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
 app.listen(
     port
     , () => console.log(`[${time}]: Application is running in port ${port}`)
-    );
+);
 
