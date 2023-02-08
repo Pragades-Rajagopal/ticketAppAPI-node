@@ -2,41 +2,64 @@
 GET http://localhost:9192/ticketapp/api/details/ HTTP/1.1
 
 ###
-GET http://localhost:9192/ticketapp/api/details/Mar2022/ HTTP/1.1
-
-###
 GET http://localhost:9192/ticketapp/api/details/months/ HTTP/1.1
 
 ###
-GET http://localhost:9192/ticketapp/api/ticket-count/ HTTP/1.1
-
-###
-GET http://localhost:9192/ticketapp/api/ticket-count/Feb2022/ HTTP/1.1
-
-###
-GET http://localhost:9192/ticketapp/api/resolution/Application+Latency+-+Multi+user+sessions/ HTTP/1.1
-
-###
-GET http://localhost:9192/ticketapp/api/all/resolutions/ HTTP/1.1
-
-###
-GET http://localhost:9192/ticketapp/api/ticket/10033941/ HTTP/1.1
-
-### 
-PUT http://localhost:9192/ticketapp/api/ticket/ HTTP/1.1
+GET http://localhost:9192/ticketapp/api/details/month/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "APP_NM": "REPC",
-    "TICKET": 10034041,
-    "RESOLUTION": "Charge Transfer - Retrigger charges",
-    "TICKET_TYPE": "Incident",
-    "COMMENT": "NA",
-    "CREATED_ON": "2022/02/15 03:33:10",
-    "MON": "Feb2022",
-    "RESOLVED_BY": "Bharat"
+    "month": "Feb2023"
 }
 
 ###
-GET http://localhost:9192/ticketapp/api/insights/ HTTP/1.1
+GET http://localhost:9192/ticketapp/api/details/ticket-count/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp/api/details/ticket-count/Feb2023/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp/api/details/resolution/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "RESOLUTION": "Application Latency - Multi user sessions"
+}
+
+###
+GET http://localhost:9192/ticketapp/api/details/resolution/all/ HTTP/1.1
+
+###
+GET http://localhost:9192/ticketapp/api/details/ticket/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "TICKET": "TEST10034158"
+}
+
+### 
+PUT http://localhost:9192/ticketapp/api/details/ticket/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "TICKET": "TEST10034158",
+    "RESOLUTION": "User Request - Script/Data Extract",
+    "TICKET_TYPE": "Service Request",
+    "COMMENT": "Test",
+    "CREATED_ON": "2023/02/03 09:48:13",
+    "MON": "Feb2023",
+    "RESOLVED_BY": "Bharat",
+    "APP_NM": "REPC"
+}
+
+###
+DELETE http://localhost:9192/ticketapp/api/details/ticket/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "TICKET": "TEST10034158"
+}
+
+###
+GET http://localhost:9192/ticketapp/details/api-insight/ HTTP/1.1
 
