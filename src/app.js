@@ -7,6 +7,9 @@ const moment = require('moment');
 const logPath = require('./utils/createlogFile');
 const info = require('./insight.json');
 
+const swaggerJSdocs = require('./swagger.json');
+const { serve, setup } = require('swagger-ui-express');
+
 /**
  * Below code is for chart application - Dev purpose
  */
@@ -24,6 +27,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+app.use('/api-docs', serve, setup(swaggerJSdocs));
 
 app.get('/ticketapp/api/details', (req, res) => {
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
@@ -43,7 +47,11 @@ app.get('/ticketapp/api/details/months', (req, res) => {
 });
 
 app.get('/ticketapp/api/details/month', (req, res) => {
-    const month = req.body.month;
+    const month = req.query.MONTH;
+
+    if (!month) {
+        return res.status(400).json({ "message": "MONTH is mandatory" })
+    }
 
     const data = model.getDataByMonth(month);
 
@@ -67,8 +75,8 @@ app.get('/ticketapp/api/details/ticket-count', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/details/ticket-count/:month', (req, res) => {
-    const month = req.params.month;
+app.get('/ticketapp/api/details/ticket-count/:MONTH', (req, res) => {
+    const month = req.params.MONTH;
 
     const data = model.ticketCountMonth(month);
 
@@ -83,10 +91,10 @@ app.get('/ticketapp/api/details/ticket-count/:month', (req, res) => {
     let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
     console.log(`[${time}]: api request to get ticket count detail for month: ${month}`);
 
-    res.status(200).json(data);
+    res.status(200).json(data[0]);
 });
 
-app.get('/ticketapp/api/details/resolution/', (req, res) => {
+app.post('/ticketapp/api/details/resolution/', (req, res) => {
     var resolution = req.body.RESOLUTION;
 
     if (!resolution) {
@@ -117,7 +125,7 @@ app.get('/ticketapp/api/details/resolution/all', (req, res) => {
     res.status(200).json(data);
 });
 
-app.get('/ticketapp/api/details/ticket', (req, res) => {
+app.post('/ticketapp/api/details/ticket', (req, res) => {
     const ticket = req.body.TICKET;
     if (!ticket) {
         return res.status(400).json({ message: "TICKET is mandatory" })
@@ -185,7 +193,7 @@ app.put('/ticketapp/api/details/ticket', (req, res) => {
             let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
             console.log(`[${time}]: api request to update ticket detail for invalid ticket: ${ticket}`);
 
-            res.status(400).json({ "message": "no update performed on invalid ticket " + ticket });
+            res.status(404).json({ "message": "no update performed on invalid ticket " + ticket });
             return;
         }
 
@@ -214,7 +222,7 @@ app.delete('/ticketapp/api/details/ticket', (req, res) => {
         let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
         console.log(`[${time}]: api request to delete ticket detail for invalid ticket: ${ticket}`);
 
-        res.status(400).json({ "message": "no delete performed on invalid ticket: " + ticket });
+        res.status(404).json({ "message": "no delete performed on invalid ticket: " + ticket });
         return;
     }
 
@@ -224,7 +232,7 @@ app.delete('/ticketapp/api/details/ticket', (req, res) => {
     res.status(200).json({ "message": `ticket ${ticket} deleted` });
 });
 
-app.get('/ticketapp/details/api-insight', (req, res) => {
+app.get('/ticketapp/api/details/insight', (req, res) => {
     res.status(200).json(info);
 });
 

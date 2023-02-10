@@ -1,0 +1,286 @@
+{
+    "info": {
+        "_postman_id": "12c62807-1724-4b73-8041-8538568506f2",
+        "name": "TicketToolAPI",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "/ticketapp/api/details/",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/months",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/months",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "months"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/month",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/month?MONTH=Feb2023",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "month"
+                    ],
+                    "query": [
+                        {
+                            "key": "MONTH",
+                            "value": "Feb2023"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/ticket-count",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/ticket-count/",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "ticket-count",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/ticket-count/Feb2023",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/ticket-count/Feb2022",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "ticket-count",
+                        "Feb2022"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/resolution",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"RESOLUTION\": \"Backend Update - Commercials\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/resolution",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "resolution"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/resolution/all",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/resolution/all",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "resolution",
+                        "all"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/ticket",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"TICKET\": \"TEST10034154\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/ticket",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "ticket"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/ticket",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"TICKET\": \"TEST10034140\",\n    \"RESOLUTION\": \"Backend Update - CDD\",\n    \"TICKET_TYPE\": \"Service Request\",\n    \"COMMENT\": \"CDD update. Estimation have been shared for next step planning.\",\n    \"CREATED_ON\": \"2023/02/01 06:27:53\",\n    \"MON\": \"Feb2023\",\n    \"RESOLVED_BY\": \"Bharat\",\n    \"APP_NM\": \"REPC\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/ticket",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "ticket"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/ticket",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"TICKET\": \"TEST10034154\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/ticket",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "ticket"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "/ticketapp/api/details/insight",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/ticketapp/api/details/insight",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "ticketapp",
+                        "api",
+                        "details",
+                        "insight"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
