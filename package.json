@@ -7,7 +7,7 @@
     "start": "nodemon src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pragadeswar Rajagopal",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^8.0.1",
@@ -16,7 +16,8 @@
     "express": "^4.17.2",
     "fast-csv": "^4.3.6",
     "moment": "^2.29.1",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

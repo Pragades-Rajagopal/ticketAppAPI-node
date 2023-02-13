@@ -1,0 +1,450 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger for Ticket Management Tool API",
+        "description": "Swagger documentation to get the extended information from the TIcket tool",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://server:9192/ticketapp/api/details",
+            "description": "Production URL"
+        },
+        {
+            "url": "http://localhost:9192/ticketapp/api/details",
+            "description": "Testing"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "All Details"
+                ],
+                "summary": "This endpoint is to get the ticket count per resolution per month",
+                "description": "This endpoint is to get the ticket count per resolution per month",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/details"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/months": {
+            "get": {
+                "tags": [
+                    "Months"
+                ],
+                "summary": "This endpoint is to get all the months for which tickets are stored",
+                "description": "This endpoint is to get all the months for which tickets are stored",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/months"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/month": {
+            "get": {
+                "tags": [
+                    "Months"
+                ],
+                "summary": "This endpoint is to get the ticket count per resolution per month",
+                "description": "This endpoint is to get the ticket count per resolution per month",
+                "parameters": [
+                    {
+                        "name": "MONTH",
+                        "in": "query",
+                        "description": "Define month value",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/details"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "MONTH is mandatory"
+                    },
+                    "404": {
+                        "description": "No data available for specified month"
+                    }
+                }
+            }
+        },
+        "/ticket-count": {
+            "get": {
+                "tags": [
+                    "Ticket count"
+                ],
+                "summary": "This endpoint is to get ticket count for all months",
+                "description": "his endpoint is to get ticket count for all months",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ticket-count"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ticket-count/{MONTH}": {
+            "get": {
+                "tags": [
+                    "Ticket count"
+                ],
+                "summary": "This endpoint is to get ticket count for specified month",
+                "description": "This endpoint is to get ticket count for specified month",
+                "parameters": [
+                    {
+                        "name": "MONTH",
+                        "in": "path",
+                        "description": "Define month value",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ticket-count"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "no data available for specified month"
+                    }
+                }
+            }
+        },
+        "/resolution": {
+            "post": {
+                "tags": [
+                    "Resolution"
+                ],
+                "summary": "This endpoint is to get the ticket count for given resolution per month",
+                "description": "This endpoint is to get the ticket count for given resolution per month",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "RESOLUTION": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/resolution-response"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "RESOLUTION is mandatory"
+                    },
+                    "404": {
+                        "description": "no output for provided resolution"
+                    }
+                }
+            }
+        },
+        "/resolution/all": {
+            "get": {
+                "tags": [
+                    "Resolution"
+                ],
+                "summary": "This endpoint is to get all the resolutions",
+                "description": "This endpoint is to get all the resolutions",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/resolution"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ticket": {
+            "post": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "This endpoint is to get ticket detail for a given ticket",
+                "description": "This endpoint is to get ticket detail for a given ticket",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "TICKET": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ticket"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "TICKET is mandatory"
+                    },
+                    "404": {
+                        "description": "ticket detail not available for given ticket"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "This endpoint is to update ticket detail for a given ticket",
+                "description": "Updates application name, created-on, month, resolved-by only",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ticket"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "details updated"
+                    },
+                    "400": {
+                        "description": "mandatory error"
+                    },
+                    "404": {
+                        "description": "no update performed on invalid ticket"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "This endpoint is to delete a given ticket",
+                "description": "This endpoint is to delete a given ticket",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "TICKET": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "ticket deleted"
+                    },
+                    "400": {
+                        "description": "TICKET is mandatory"
+                    },
+                    "404": {
+                        "description": "no delete performed on invalid ticket"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "details": {
+                "type": "object",
+                "properties": {
+                    "RESOLUTION": {
+                        "type": "string",
+                        "description": "Resolution"
+                    },
+                    "TICKET_COUNT": {
+                        "type": "integer"
+                    },
+                    "TICKET_TYPE": {
+                        "type": "string",
+                        "format": "Ticket type"
+                    },
+                    "MONTH": {
+                        "type": "string",
+                        "format": "Month"
+                    }
+                }
+            },
+            "months": {
+                "type": "object",
+                "properties": {
+                    "MONTH": {
+                        "type": "string",
+                        "description": "Month"
+                    }
+                }
+            },
+            "ticket-count": {
+                "type": "object",
+                "properties": {
+                    "MONTH": {
+                        "type": "string",
+                        "description": "Month"
+                    },
+                    "INCIDENT": {
+                        "type": "integer",
+                        "description": "Incident"
+                    },
+                    "SR": {
+                        "type": "integer",
+                        "description": "Service Request"
+                    },
+                    "TOTAL_COUNT": {
+                        "type": "integer",
+                        "description": "Ticket count"
+                    }
+                },
+                "xml": {
+                    "name": "order"
+                }
+            },
+            "resolution-response": {
+                "type": "object",
+                "properties": {
+                    "MONTH": {
+                        "type": "string"
+                    },
+                    "TICKET_COUNT": {
+                        "type": "integer"
+                    },
+                    "TICKET_TYPE": {
+                        "type": "string"
+                    }
+                }
+            },
+            "resolution": {
+                "type": "object",
+                "properties": {
+                    "RESOLUTION": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ticket": {
+                "type": "object",
+                "properties": {
+                    "TICKET": {
+                        "type": "string"
+                    },
+                    "RESOLUTION": {
+                        "type": "string"
+                    },
+                    "TICKET_TYPE": {
+                        "type": "string"
+                    },
+                    "COMMENT": {
+                        "type": "string"
+                    },
+                    "CREATED_ON": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "MON": {
+                        "type": "string"
+                    },
+                    "RESOLVED_BY": {
+                        "type": "string"
+                    },
+                    "APP_NM": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
