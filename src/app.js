@@ -1,3 +1,6 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -19,7 +22,7 @@ const { serve, setup } = require('swagger-ui-express');
 
 console.file(logPath.logFile);
 
-const port = 9192;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -239,8 +242,8 @@ app.get('/ticketapp/api/details/insight', (req, res) => {
 let time = moment.utc().format('YYYY/MM/DD hh:mm:ss');
 
 app.listen(
-    port
-    , () => console.log(`[${time}]: Application is running in port ${port}`)
+    PORT
+    , () => console.log(`[${time}]: Application is running in port ${PORT}`)
 );
 
 

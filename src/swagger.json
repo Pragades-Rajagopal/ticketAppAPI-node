@@ -12,7 +12,7 @@
         },
         {
             "url": "http://localhost:9192/ticketapp/api/details",
-            "description": "Testing"
+            "description": "Test URL"
         }
     ],
     "paths": {
